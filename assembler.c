@@ -7,6 +7,7 @@ main()
 {
 	dec_to_bin(10, 10);
 	return 1;
+	//testing 2 changes 
 }
 
 int dec_to_bin(int dec, int size)
@@ -34,4 +35,5 @@ int dec_to_bin(int dec, int size)
 		printf("%d", *num);
 	}
 	return 1;
+	// my changes
 }
