@@ -31,7 +31,7 @@ int dec_to_bin(int dec, int size)
 
 	for (int i = 0; i < size; i++)
 	{
-		/*print("%d", )*/
+		printf("%d", *num);
 	}
 	return 1;
 }
