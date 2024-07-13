@@ -14,4 +14,4 @@ int closeFile(FILE* file);
   return A pointer to FILE on success; NULL on failure */
 char* readLine(FILE* file);
 
-#endif /* FILE_OPERATIONS_H */
+#endif /* FILE_OPERATIONS_H  */

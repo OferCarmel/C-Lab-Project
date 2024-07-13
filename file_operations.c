@@ -45,5 +45,5 @@ char* readLine(FILE* file)
         free(buffer); /* Free memory if end of file or error occurs */
         return NULL; /* Return NULL on end of file or error */
     }
-    return buffer; /* Return the line read from the file */
+    return buffer; /* Return the line read from the files */
 }
