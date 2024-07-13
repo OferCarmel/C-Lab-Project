@@ -1,13 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "pre_proc.c"
 
 int dec_to_bin(int, int);
+
 main()
 {
-	dec_to_bin(-10, 10);
+	FILE* fptr;
+	fptr = fopen("asembley_code.as", "r");
+	char* a = getword(fptr);
+
+	printf("%s", a);
 	return 1;
-	//testing 2 changes 
 }
+
 
 int dec_to_bin(int dec, int size)
 {
@@ -19,7 +25,7 @@ int dec_to_bin(int dec, int size)
 
 	if (num == NULL) {
 		printf("Memory allocation failed\n");
-		return -1;  // Return an error code
+		return -1;  /* Return an error code*/
 	}
 
 	if(num)   /*insert into num from the end*/
@@ -32,11 +38,10 @@ int dec_to_bin(int dec, int size)
 		num--;
 	}
 
-	// Print the binary number for verification
+	 /*Print the binary number for verification*/
 	for (int i = 0; i < size; i++) {
 		printf("%d", num_start[i]);
 	}
-	getchar();
 	return 1;
-	// my changes
+	/*my changes*/
 }
