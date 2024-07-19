@@ -18,5 +18,19 @@
     <ClCompile Include="assembler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file_operations.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="typedef.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="file_operations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="text.as" />
   </ItemGroup>
 </Project>

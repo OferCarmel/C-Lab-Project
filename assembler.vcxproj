@@ -128,6 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="assembler.c" />
+    <ClCompile Include="file_operations.c" />
+    <ClCompile Include="typedef.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="file_operations.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="text.as" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
