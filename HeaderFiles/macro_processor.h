@@ -3,10 +3,7 @@
 #define MACRO_PROCESSOR_H
 
 
-
-#define MAX_LINE_LENGTH 256
-
-
+#include "../HeaderFiles/file_operations.h"
 
 /* Struct to represent a macro */
 
@@ -14,11 +11,7 @@ typedef struct Macro {
 
     char name[MAX_LINE_LENGTH];
 
-    char** value;
-
-    int value_count;
-
-    int value_capacity;
+    struct LineNode;
 
     struct Macro* next;
 
@@ -32,9 +25,20 @@ typedef struct LineNode {
 
     char* line;
 
+    int line_number;
+
     struct LineNode* next;
 
 } LineNode;
+
+typedef struct WordNode {
+
+    char* word = NULL;
+    char pos=0;
+
+    struct WordNode* next;
+
+} WordNode;
 
 
 
