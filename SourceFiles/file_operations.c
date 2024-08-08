@@ -151,3 +151,104 @@ char* get_word(char* line)
     
     return new_word - (size);
 }
+
+/*  to read a single line from a file, up to 80 characters */
+char* readLine(FILE* file) 
+{
+    if (file == NULL)
+    {
+        fprintf(stderr, "Error: File is not opened.\n");
+        return NULL;
+    }
+
+    char* buffer = malloc(81); /* Allocate memory for the buffer, 80 chars + 1 for '\0' */
+    if (buffer == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        return NULL;
+    }
+    if (fgets(buffer, 81, file) == NULL)
+    {
+        free(buffer); /* Free memory if end of file or error occurs */
+        return NULL; /* Return NULL on end of file or error */
+    }
+    return buffer; /* Return the line read from the files */
+}
+
+
+typedef struct {
+    char* filename;
+    int line_number;
+} file_location;
+
+char* clean_file_whitespace(char source_filename[]) {
+    char* temp_filename;  // Stores the name of the new temporary file
+    char buffer[BUFFER_SIZE];  // Buffer for storing each line of the input file
+    int line_count;  // Keeps track of the line number in the input file
+    FILE* source_file;  // File pointer for the input file
+    FILE* temp_file;  // File pointer for the new temporary file
+
+    // Open the source file for reading
+    source_file = fopen(source_filename, "r");
+    if (source_file == NULL) {
+        log_internal_error(2);  // Log an error if the file cannot be opened
+        return NULL;
+    }
+
+    // Generate a new name for the temporary file
+    temp_filename = generate_temp_filename(source_filename, ".tmp");
+    if (temp_filename == NULL) {
+        // Close the source file and log an error if the new filename cannot be created
+        close_files(2, "file", source_file);
+        return NULL;
+    }
+
+    // Open the temporary file for writing
+    temp_file = fopen(temp_filename, "w");
+    if (temp_file == NULL) {
+        // Close the source file, log an error, and clean up if the temp file cannot be opened
+        close_files(4, "file", source_file, "%s", temp_filename);
+        log_internal_error(7);
+        return NULL;
+    }
+
+    // Read each line from the source file and remove extra spaces
+    line_count = 0;
+    while (fgets(buffer, 999, source_file) != NULL) {
+        line_count++;
+        // Check if the line length exceeds the maximum allowed length
+        if (strlen(buffer) > MAX_LENGTH) {
+            file_location info;
+            info.filename = source_filename;
+            info.line_number = line_count;
+            log_external_error(30, info);  // Log an error if the line is too long
+            fclose(source_file);
+            fclose(temp_file);
+            return NULL;
+        }
+        else if (*buffer == ';') {
+            // If the line starts with a semicolon, replace it with a newline character
+            *buffer = '\n';
+            *(buffer + 1) = '\0';
+        }
+        else {
+            // Remove extra spaces from the line
+            trim_extra_spaces(buffer);
+        }
+
+        // Write the modified line to the temporary file
+        fprintf(temp_file, "%s", buffer);
+    }
+
+    // Close both files
+    fclose(source_file);
+    fclose(temp_file);
+
+    // Return the name of the temporary file
+    return temp_filename;
+}
+
+
+
+
+
